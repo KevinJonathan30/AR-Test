@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>AR Experience</title>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.0.5/aframe/build/aframe-ar.js"></script>
+    <style>
+        #arScene {
+            height: 100%;
+            width: 100%;
+        }
+        #arImage {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <a-scene embedded arjs="debugUIEnabled: false;">
+        <a-marker preset="hiro">
+            <a-entity id="imageContainer"></a-entity>
+        </a-marker>
+        <a-entity camera></a-entity>
+    </a-scene>
+    <img id="arImage" src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png" alt="AR Image">
+    <script>
+        const imageContainer = document.querySelector('#imageContainer');
+        const arImage = document.querySelector('#arImage');
+        imageContainer.appendChild(arImage);
+        arImage.addEventListener('load', function() {
+            arImage.setAttribute('scale', '0.5 0.5 0.5');
+        });
+        const marker = document.querySelector('a-marker');
+        marker.addEventListener('markerFound', function() {
+            arImage.style.visibility = 'visible';
+        });
+        marker.addEventListener('markerLost', function() {
+            arImage.style.visibility = 'hidden';
+        });
+    </script>
+</body>
+</html>
