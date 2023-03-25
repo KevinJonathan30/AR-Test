@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>AR Experience</title>
@@ -7,12 +8,19 @@
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.0.5/aframe/build/aframe-ar.js"></script>
     <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
 </head>
+
 <body>
     <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: true;">
-        <a-marker type="pattern" url="https://raw.githubusercontent.com/KevinJonathan30/AR-Test/master/pattern-qrcode.patt">
-            <a-box position='0 0.5 0' color="yellow"></a-box>
+        <a-assets>
+            <img id="my-image" src="025.png">
+        </a-assets>
+
+        <a-marker type="pattern"
+            url="https://raw.githubusercontent.com/KevinJonathan30/AR-Test/master/pattern-qrcode.patt">
+            <a-image src="#my-image"></a-image>
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
 </body>
+
 </html>
