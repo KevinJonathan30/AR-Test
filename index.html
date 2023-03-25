@@ -5,43 +5,14 @@
     <title>AR Experience</title>
     <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
     <script src="https://cdn.rawgit.com/jeromeetienne/AR.js/2.0.5/aframe/build/aframe-ar.js"></script>
-    <style>
-        #arScene {
-            height: 100%;
-            width: 100%;
-        }
-        #arImage {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            visibility: hidden;
-        }
-    </style>
+    <script src="https://rawgit.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
 </head>
 <body>
-    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: true; detectionMode: mono_and_matrix; matrixCodeType: 3x3;">
-        <a-marker type="pattern" preset="custom" url="pattern-qrcode.patt">
-            <a-entity id="imageContainer"></a-entity>
-            <a-box position='0 0.5 0' material='opacity: 0.5;'></a-box>
+    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: true;">
+        <a-marker type="pattern" url="https://raw.githubusercontent.com/KevinJonathan30/AR-Test/master/pattern-qrcode.patt">
+            <a-box position='0 0.5 0' color="yellow"></a-box>
         </a-marker>
         <a-entity camera></a-entity>
     </a-scene>
-    <img id="arImage" src="025.png" alt="AR Image">
-    <script>
-        const imageContainer = document.querySelector('#imageContainer');
-        const arImage = document.querySelector('#arImage');
-        imageContainer.appendChild(arImage);
-        arImage.addEventListener('load', function() {
-            arImage.setAttribute('scale', '0.5 0.5 0.5');
-        });
-        const marker = document.querySelector('a-marker');
-        marker.addEventListener('markerFound', function() {
-            arImage.style.visibility = 'visible';
-        });
-        marker.addEventListener('markerLost', function() {
-            arImage.style.visibility = 'hidden';
-        });
-    </script>
 </body>
 </html>
